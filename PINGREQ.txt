@@ -1,0 +1,10 @@
+
+ProductKey : a1iTuQEv1U6
+DeviceName : dev1
+DeviceSecret : 553c99fb69b77e7a9f06b3eefd407367
+
+PINGREQ:
+	心跳请求包，只有固定报头，没有可变报头和有效载荷
+
+固定抱头：
+	C0 00
