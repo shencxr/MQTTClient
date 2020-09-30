@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Prerequisites
 *.d
 
@@ -31,7 +31,7 @@
 *.exe
 *.out
 *.app
-=======
+
 *.pro.user.*
 ./ideas
 .idea
@@ -50,6 +50,3 @@ Makefile
 
 
 
-
-
->>>>>>> create base socket dis/connect
