@@ -26,9 +26,20 @@ private slots:
 
     void on_Disconnect_pushButton_clicked();
 
+    void deal_ClientConnected();
+
+    void on_Heart_beat_pushButton_clicked();
+
+    void on_Subscribe_pushButton_clicked();
+
+    void on_Cancl_Subscribe_pushButton_clicked();
+
+    void _Heart_beat();
+
 private:
     Ui::Form *ui;
     QTcpSocket *client;
+    QTimer* Heart_Timer;
 };
 
 #endif // WINDOW_H

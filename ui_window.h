@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'window.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.15.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -56,12 +57,17 @@ public:
     QPushButton *Publish_pushButton;
     QPushButton *Heart_beat_pushButton;
     QPushButton *Subscribe_pushButton;
+    QComboBox *Heart_Interval_comboBox;
     QPushButton *Cancl_Subscribe_pushButton;
     QSpacerItem *verticalSpacer_6;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
     QLabel *Topic_label;
     QLineEdit *Topic_lineEdit;
+    QLabel *Message_ID_label;
+    QLineEdit *Message_ID_lineEdit;
+    QLabel *QoS_label;
+    QComboBox *QoS_comboBox;
     QHBoxLayout *horizontalLayout_2;
     QTextEdit *Send_textEdit;
     QVBoxLayout *verticalLayout_2;
@@ -160,7 +166,7 @@ public:
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Preferred);
 
         verticalLayout_4->addItem(verticalSpacer_4);
 
@@ -174,7 +180,7 @@ public:
 
         verticalLayout_4->addWidget(Disconnect_pushButton);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Preferred);
 
         verticalLayout_4->addItem(verticalSpacer_3);
 
@@ -214,6 +220,18 @@ public:
 
         verticalLayout_5->addWidget(Subscribe_pushButton);
 
+        Heart_Interval_comboBox = new QComboBox(widget);
+        Heart_Interval_comboBox->addItem(QString());
+        Heart_Interval_comboBox->addItem(QString());
+        Heart_Interval_comboBox->addItem(QString());
+        Heart_Interval_comboBox->addItem(QString());
+        Heart_Interval_comboBox->addItem(QString());
+        Heart_Interval_comboBox->setObjectName(QString::fromUtf8("Heart_Interval_comboBox"));
+        Heart_Interval_comboBox->setEditable(true);
+        Heart_Interval_comboBox->setFrame(true);
+
+        verticalLayout_5->addWidget(Heart_Interval_comboBox);
+
         Cancl_Subscribe_pushButton = new QPushButton(widget);
         Cancl_Subscribe_pushButton->setObjectName(QString::fromUtf8("Cancl_Subscribe_pushButton"));
 
@@ -244,6 +262,55 @@ public:
         Topic_lineEdit->setObjectName(QString::fromUtf8("Topic_lineEdit"));
 
         horizontalLayout->addWidget(Topic_lineEdit);
+
+        Message_ID_label = new QLabel(widget);
+        Message_ID_label->setObjectName(QString::fromUtf8("Message_ID_label"));
+
+        horizontalLayout->addWidget(Message_ID_label);
+
+        Message_ID_lineEdit = new QLineEdit(widget);
+        Message_ID_lineEdit->setObjectName(QString::fromUtf8("Message_ID_lineEdit"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(Message_ID_lineEdit->sizePolicy().hasHeightForWidth());
+        Message_ID_lineEdit->setSizePolicy(sizePolicy1);
+        Message_ID_lineEdit->setMaximumSize(QSize(80, 16777215));
+        Message_ID_lineEdit->setCursor(QCursor(Qt::IBeamCursor));
+        Message_ID_lineEdit->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout->addWidget(Message_ID_lineEdit);
+
+        QoS_label = new QLabel(widget);
+        QoS_label->setObjectName(QString::fromUtf8("QoS_label"));
+
+        horizontalLayout->addWidget(QoS_label);
+
+        QoS_comboBox = new QComboBox(widget);
+        QoS_comboBox->addItem(QString());
+        QoS_comboBox->addItem(QString());
+        QoS_comboBox->addItem(QString());
+        QoS_comboBox->addItem(QString());
+        QoS_comboBox->setObjectName(QString::fromUtf8("QoS_comboBox"));
+        QoS_comboBox->setMaximumSize(QSize(40, 16777215));
+        QPalette palette;
+        QBrush brush(QColor(0, 0, 0, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush1(QColor(255, 255, 255, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Light, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Light, brush1);
+        QBrush brush2(QColor(120, 120, 120, 255));
+        brush2.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush2);
+        palette.setBrush(QPalette::Disabled, QPalette::Light, brush1);
+        QoS_comboBox->setPalette(palette);
+        QoS_comboBox->setMouseTracking(false);
+        QoS_comboBox->setEditable(false);
+
+        horizontalLayout->addWidget(QoS_comboBox);
 
 
         verticalLayout_3->addLayout(horizontalLayout);
@@ -302,29 +369,49 @@ public:
         QObject::connect(Clear_Recv_pushButton, SIGNAL(clicked()), Receive_textEdit, SLOT(clear()));
         QObject::connect(Clear_Send_pushButton, SIGNAL(clicked()), Send_textEdit, SLOT(clear()));
 
+        Heart_Interval_comboBox->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(Form);
     } // setupUi
 
     void retranslateUi(QWidget *Form)
     {
-        Form->setWindowTitle(QApplication::translate("Form", "Form", nullptr));
-        Host_label->setText(QApplication::translate("Form", "host:", nullptr));
+        Form->setWindowTitle(QCoreApplication::translate("Form", "Form", nullptr));
+        Host_label->setText(QCoreApplication::translate("Form", "host:", nullptr));
         Host_IP_label->setText(QString());
-        Connect_label->setText(QApplication::translate("Form", "disconnect", nullptr));
-        Remote_IP_label->setText(QApplication::translate("Form", "Remote_IP:", nullptr));
+        Connect_label->setText(QCoreApplication::translate("Form", "disconnect", nullptr));
+        Remote_IP_label->setText(QCoreApplication::translate("Form", "Remote_IP:", nullptr));
         Remote_IP_lineEdit->setInputMask(QString());
-        Client_ID_label->setText(QApplication::translate("Form", "Client_ID:", nullptr));
-        User_Name_label->setText(QApplication::translate("Form", "User_Name\357\274\232", nullptr));
-        Password_label->setText(QApplication::translate("Form", "Password:", nullptr));
-        Connect_pushButton->setText(QApplication::translate("Form", "Connect", nullptr));
-        Disconnect_pushButton->setText(QApplication::translate("Form", "Disconnect", nullptr));
-        Publish_pushButton->setText(QApplication::translate("Form", "Publish", nullptr));
-        Heart_beat_pushButton->setText(QApplication::translate("Form", "Heart_beat", nullptr));
-        Subscribe_pushButton->setText(QApplication::translate("Form", "Subscribe", nullptr));
-        Cancl_Subscribe_pushButton->setText(QApplication::translate("Form", "Cancl_Subscribe", nullptr));
-        Topic_label->setText(QApplication::translate("Form", "Topic:", nullptr));
-        Clear_Recv_pushButton->setText(QApplication::translate("Form", "Clear\342\206\222", nullptr));
-        Clear_Send_pushButton->setText(QApplication::translate("Form", "\342\206\220Clear", nullptr));
+        Remote_IP_lineEdit->setText(QCoreApplication::translate("Form", "a1iTuQEv1U6.iot-as-mqtt.cn-shanghai.aliyuncs.com:1883", nullptr));
+        Client_ID_label->setText(QCoreApplication::translate("Form", "Client_ID:", nullptr));
+        Client_ID_lineEdit->setText(QCoreApplication::translate("Form", "dev1|securemode=3,signmethod=hmacsha1|", nullptr));
+        User_Name_label->setText(QCoreApplication::translate("Form", "User_Name\357\274\232", nullptr));
+        User_Name_lineEdit->setText(QCoreApplication::translate("Form", "dev1&a1iTuQEv1U6", nullptr));
+        Password_label->setText(QCoreApplication::translate("Form", "Password:", nullptr));
+        Password_lineEdit->setText(QCoreApplication::translate("Form", "fd5840dbf1e74132d6d7043241e7aa6a79ec7902", nullptr));
+        Connect_pushButton->setText(QCoreApplication::translate("Form", "Connect", nullptr));
+        Disconnect_pushButton->setText(QCoreApplication::translate("Form", "Disconnect", nullptr));
+        Publish_pushButton->setText(QCoreApplication::translate("Form", "Publish", nullptr));
+        Heart_beat_pushButton->setText(QCoreApplication::translate("Form", "Heart_beat", nullptr));
+        Subscribe_pushButton->setText(QCoreApplication::translate("Form", "Subscribe", nullptr));
+        Heart_Interval_comboBox->setItemText(0, QCoreApplication::translate("Form", "No", nullptr));
+        Heart_Interval_comboBox->setItemText(1, QCoreApplication::translate("Form", "10", nullptr));
+        Heart_Interval_comboBox->setItemText(2, QCoreApplication::translate("Form", "20", nullptr));
+        Heart_Interval_comboBox->setItemText(3, QCoreApplication::translate("Form", "50", nullptr));
+        Heart_Interval_comboBox->setItemText(4, QCoreApplication::translate("Form", "100", nullptr));
+
+        Cancl_Subscribe_pushButton->setText(QCoreApplication::translate("Form", "Cancl_Subscribe", nullptr));
+        Topic_label->setText(QCoreApplication::translate("Form", "Topic:", nullptr));
+        Message_ID_label->setText(QCoreApplication::translate("Form", "MessageID", nullptr));
+        QoS_label->setText(QCoreApplication::translate("Form", "QoS", nullptr));
+        QoS_comboBox->setItemText(0, QCoreApplication::translate("Form", "0", nullptr));
+        QoS_comboBox->setItemText(1, QCoreApplication::translate("Form", "1", nullptr));
+        QoS_comboBox->setItemText(2, QCoreApplication::translate("Form", "2", nullptr));
+        QoS_comboBox->setItemText(3, QCoreApplication::translate("Form", "3", nullptr));
+
+        Clear_Recv_pushButton->setText(QCoreApplication::translate("Form", "Clear\342\206\222", nullptr));
+        Clear_Send_pushButton->setText(QCoreApplication::translate("Form", "\342\206\220Clear", nullptr));
     } // retranslateUi
 
 };

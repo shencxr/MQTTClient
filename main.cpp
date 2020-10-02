@@ -28,13 +28,14 @@ int main(int argc, char *argv[])
 //    cout<<uint(a.CleanSession)<<endl;
 //    cout<<uint(a.RESERVED)<<endl;
 
-//    auto con=MQTT::connect("dev1|securemode=3,signmethod=hmacsha1|",
-//                  "dev1&a1iTuQEv1U6","fd5840dbf1e74132d6d7043241e7aa6a79ec7902","","",true,true);
-//    string c(con.first.get(),size_t(con.second));
-//    cout<<"c.size = "<<c.size()<<endl;
-//    int n=0;
-//    for_each(c.begin(),c.end(),[&n](char c){cout<<hex<<setw(2)<<setfill('0')<<uppercase<<static_cast<unsigned int>(c&0xff)<<" ";n++;if(n>=18){cout<<endl;n=0;}});
-//    cout<<endl;
+    auto con=MQTT::connect("dev1|securemode=3,signmethod=hmacsha1|",
+                  "dev1&a1iTuQEv1U6","fd5840dbf1e74132d6d7043241e7aa6a79ec7902","","",true,true);
+    string c(con.first.get(),size_t(con.second));
+    cout<<"c.size = "<<c.size()<<endl;
+    int n=0;
+    for_each(c.begin(),c.end(),[&n](char c){cout<<hex<<setw(2)<<setfill('0')<<uppercase<<static_cast<unsigned int>(c&0xff)<<" ";n++;if(n>=18){cout<<endl;n=0;}});
+    cout<<endl;
+
 
     Window w;
     w.show();

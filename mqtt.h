@@ -39,7 +39,7 @@ public:
         PUBREC=0x50,
         PUBREL=0x60,
         PUBCOMP=0x70,
-        SUBSCRIBE=0x80,
+        SUBSCRIBE=0x82,
         SUBACK=0x90,
         UNSUBSCRIBE=0xA0,
         UNSUBACK=0xB0,
@@ -114,6 +114,42 @@ public:
 
 //    pair<shared_ptr<const char>,int64_t> connect(const Connect_Variable& Variable,const string& ClientID,const string&UserName="",const string&Password="",const string& WillTopic="",
 //                                                 const string&WillMessage="");
+
+    static pair<shared_ptr<const char>,int64_t> subscribe(unsigned short MessageID,string Topic,unsigned char QoS=0){
+        string final;
+        final.push_back(char((MessageID>>8)&0xFF));
+        final.push_back(char(MessageID&0xFF));
+
+        MQTT_Util_Convert_string_to_UTF8(Topic);
+        final+=Topic;
+        final.push_back(char(QoS&0xFF));
+
+        final.insert(0,MQTT_Util_Calc_remain_len(final));
+        final.insert(0,1,SUBSCRIBE);
+
+        char *p_raw=new char[final.size()];
+        memcpy(p_raw,final.c_str(),final.size());
+        shared_ptr<const char> d(p_raw,[](const char*p_raw){delete []p_raw;});
+        return pair<shared_ptr<const char>,int64_t>(d,final.size());
+    }
+
+    static pair<shared_ptr<const char>,int64_t> unsubscribe(unsigned short MessageID,string Topic){
+        string final;
+        final.push_back(char((MessageID>>8)&0xFF));
+        final.push_back(char(MessageID&0xFF));
+
+        MQTT_Util_Convert_string_to_UTF8(Topic);
+        final+=Topic;
+
+
+        final.insert(0,MQTT_Util_Calc_remain_len(final));
+        final.insert(0,1,UNSUBSCRIBE);
+
+        char *p_raw=new char[final.size()];
+        memcpy(p_raw,final.c_str(),final.size());
+        shared_ptr<const char> d(p_raw,[](const char*p_raw){delete []p_raw;});
+        return pair<shared_ptr<const char>,int64_t>(d,final.size());
+    }
 
     static pair<shared_ptr<const char>,int64_t> pingreq(){
         char *p_raw=new char[2];
