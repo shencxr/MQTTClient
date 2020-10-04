@@ -28,6 +28,8 @@ private slots:
 
     void deal_ClientConnected();
 
+    void deal_ReadyRead();
+
     void on_Heart_beat_pushButton_clicked();
 
     void on_Subscribe_pushButton_clicked();
@@ -35,6 +37,10 @@ private slots:
     void on_Cancl_Subscribe_pushButton_clicked();
 
     void _Heart_beat();
+
+    void on_Publish_pushButton_clicked();
+
+    void on_QoS_comboBox_currentIndexChanged(int index);
 
 private:
     Ui::Form *ui;

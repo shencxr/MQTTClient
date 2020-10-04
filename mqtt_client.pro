@@ -25,25 +25,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++17
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    client.cpp \
-    window.cpp
+    src/lib_json/json_reader.cpp \
+    src/lib_json/json_value.cpp \
+    src/lib_json/json_writer.cpp \
+    src/main.cpp \
+    src/window.cpp
 
 HEADERS += \
-        mainwindow.h \
-    client.h \
-    mqtt.h \
-    icom.h \
-    window.h
+    include/mqtt.h \
+    include/window.h
 
 FORMS += \
-        mainwindow.ui \
-    window.ui
+    ui/mainwindow.ui \
+    ui/window.ui
+
+UI_DIR += .//ui
+UI_HEADERS_DIR += UI_DIR
+
+INCLUDEPATH += .//include \
+               .//include//json
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+

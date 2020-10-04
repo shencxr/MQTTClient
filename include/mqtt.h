@@ -66,13 +66,13 @@ public:
         var.KeepAliveMSB=(KeepAlive>>8)&0xFF;
         var.KeepAliveLSB=KeepAlive&0xFF;
 
-        cout<<uint32_t(var.UserNameFlag)<<endl;
-        cout<<uint32_t(var.PasswordFlag)<<endl;
-        cout<<uint32_t(var.WillRetain)<<endl;
-        cout<<uint32_t(var.WillQoS)<<endl;
-        cout<<uint32_t(var.WillFlag)<<endl;
-        cout<<uint32_t(var.CleanSession)<<endl;
-        cout<<uint32_t(var.RESERVED)<<endl;
+//        cout<<uint32_t(var.UserNameFlag)<<endl;
+//        cout<<uint32_t(var.PasswordFlag)<<endl;
+//        cout<<uint32_t(var.WillRetain)<<endl;
+//        cout<<uint32_t(var.WillQoS)<<endl;
+//        cout<<uint32_t(var.WillFlag)<<endl;
+//        cout<<uint32_t(var.CleanSession)<<endl;
+//        cout<<uint32_t(var.RESERVED)<<endl;
 
         using puint8_t=uint8_t*;
         uint8_t *p=puint8_t(&var);
@@ -126,6 +126,30 @@ public:
 
         final.insert(0,MQTT_Util_Calc_remain_len(final));
         final.insert(0,1,SUBSCRIBE);
+
+        char *p_raw=new char[final.size()];
+        memcpy(p_raw,final.c_str(),final.size());
+        shared_ptr<const char> d(p_raw,[](const char*p_raw){delete []p_raw;});
+        return pair<shared_ptr<const char>,int64_t>(d,final.size());
+    }
+
+    static pair<shared_ptr<const char>,int64_t> publish(string Topic,string Message,unsigned char QoS=0,uint16_t MessageID=0,
+                                                        unsigned char DUP=0,unsigned char Retain=0){
+        string final;
+
+        MQTT_Util_Convert_string_to_UTF8(Topic);
+        final+=Topic;
+        final.push_back(char(QoS&0xFF));
+
+        if(QoS!=0){
+            final.push_back(char((MessageID>>8)&0xFF));
+            final.push_back(char(MessageID&0xFF));
+        }
+
+        final+=Message;
+
+        final.insert(0,MQTT_Util_Calc_remain_len(final));
+        final.insert(0,1,PUBLISH|(QoS!=0?((DUP&1)<<3):0)|((QoS&0x3)<<1)|(Retain&1));
 
         char *p_raw=new char[final.size()];
         memcpy(p_raw,final.c_str(),final.size());
