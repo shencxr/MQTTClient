@@ -125,7 +125,7 @@ public:
         final.push_back(char(QoS&0xFF));
 
         final.insert(0,MQTT_Util_Calc_remain_len(final));
-        final.insert(0,1,SUBSCRIBE);
+        final.insert(0,1,char(SUBSCRIBE));
 
         char *p_raw=new char[final.size()];
         memcpy(p_raw,final.c_str(),final.size());
@@ -149,12 +149,16 @@ public:
         final+=Message;
 
         final.insert(0,MQTT_Util_Calc_remain_len(final));
-        final.insert(0,1,PUBLISH|(QoS!=0?((DUP&1)<<3):0)|((QoS&0x3)<<1)|(Retain&1));
+        final.insert(0,1,char(PUBLISH|(QoS!=0?((DUP&1)<<3):0)|((QoS&0x3)<<1)|(Retain&1)));
 
         char *p_raw=new char[final.size()];
         memcpy(p_raw,final.c_str(),final.size());
         shared_ptr<const char> d(p_raw,[](const char*p_raw){delete []p_raw;});
         return pair<shared_ptr<const char>,int64_t>(d,final.size());
+    }
+
+    static void unpack_publish(pair<shared_ptr<const char>,int64_t> pack){
+
     }
 
     static pair<shared_ptr<const char>,int64_t> unsubscribe(unsigned short MessageID,string Topic){
@@ -167,7 +171,7 @@ public:
 
 
         final.insert(0,MQTT_Util_Calc_remain_len(final));
-        final.insert(0,1,UNSUBSCRIBE);
+        final.insert(0,1,char(UNSUBSCRIBE));
 
         char *p_raw=new char[final.size()];
         memcpy(p_raw,final.c_str(),final.size());

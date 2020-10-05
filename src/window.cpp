@@ -98,6 +98,9 @@ void Window::deal_ReadyRead()
 {
 
     QByteArray pack=client->readAll();
+    client->readBufferSize();
+    QByteArrayList a;
+
     ui->Receive_textEdit->append(QTime::currentTime().toString("hh:mm:ss.zzz")+" : ");
     ui->Receive_textEdit->append(pack.toHex(' '));
 
@@ -167,7 +170,7 @@ void Window::on_Heart_beat_pushButton_clicked()
             qDebug()<<"Heart_Timer UNActive";
             _Heart_beat();
             connect(Heart_Timer,&QTimer::timeout,this,&Window::_Heart_beat);
-            Heart_Timer->start(ui->Heart_Interval_comboBox->currentText().toUInt());
+            Heart_Timer->start(ui->Heart_Interval_comboBox->currentText().toInt());
         }
     }
 }
