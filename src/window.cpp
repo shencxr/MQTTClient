@@ -15,6 +15,7 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 
+
 using namespace std;
 Window::Window(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::Form),client(new QTcpSocket(this)),Heart_Timer(new QTimer(this))
@@ -42,6 +43,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent),
 
         Heart_Timer->stop();
         disconnect(Heart_Timer,&QTimer::timeout,this,&Window::_Heart_beat);
+
     });
     connect(client,&QTcpSocket::readyRead,this,&Window::deal_ReadyRead);
 

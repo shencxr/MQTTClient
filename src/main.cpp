@@ -2,6 +2,11 @@
 #include "mqtt.h"
 #include <iomanip>
 #include "window.h"
+
+
+#include <QCamera>
+#include <QCameraViewfinder>
+#include <QAbstractVideoSurface>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -36,8 +41,13 @@ int main(int argc, char *argv[])
 //    cout<<endl;
 
 
-    Window w;
-    w.show();
+//    Window w;
+//    w.show();
+
+    QCamera c1;
+    QCameraViewfinder f1;
+    c1.setViewfinder(&f1);
+    c1.service();
 
     return a.exec();
 }
